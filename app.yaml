@@ -1,0 +1,23 @@
+
+runtime: nodejs20 # or the latest supported version of Node.js
+env: standard
+service: acevolution-backend
+
+# Optional: entrypoint to start the app
+entrypoint: node index.js
+
+# Instance configuration
+instance_class: F2 # Optional, defines the instance class (F1, F2, F4, etc.)
+
+# Automatic scaling settings
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 5
+
+# Optional: timeout settings
+handlers:
+  - url: /.*
+    script: auto
+    secure: always # Redirect HTTP to HTTPS
+    redirect_http_response_code: 301
